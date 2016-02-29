@@ -1,0 +1,127 @@
+<section id="about" ng-init="know_it_init()">
+    <div class="container">
+        <div class="row col-md-12">
+            <div class="col-md-12" style="margin-top: 10px; margin-bottom: 20px;">
+                <div ng-include="'view1/top_bar.html'"></div>
+            </div>
+            <div class="col-md-8" align="center">
+                <md-card style=" padding: 10px; background-color: #e7e7e7; text-align: left;">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">Please provide more information</span>
+                            <span class="md-subhead">More the information we have, better we would be able to serve you</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-content class="md-padding" style="background-color: #e7e7e7;">
+                        <md-tabs md-selected="selectedIndex" md-border-bottom md-autoselect md-dynamic-height>
+                            <md-tab ng-repeat="tab in maintabs"
+                                    ng-disabled="tab.disabled"
+                                    label="{{tab.title}}">
+                                <div class="demo-tab tab{{$index%4}}" style="padding: 25px;">
+                                    <div ng-bind="tab.content"></div>
+                                    <div class="clearfix"></div>
+                                    <div ng-if="tab.title != 'Finalize' ">
+                                        <fieldset class="standard">
+                                            <p><div class="pin"><div class="in_pin">1. </div></div>{{tab.fields.check.text}}</p>
+                                            <div layout="row" layout-wrap flex>
+                                                <div ng-repeat="item in tab.fields.check.list" class="standard" flex="25">
+                                                    <label>
+                                                        <md-checkbox ng-click="toggle(item, selected)">
+                                                            {{item}}
+                                                        </md-checkbox>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                        <fieldset class="standard">
+                                            <p><div class="pin"><div class="in_pin">2. </div></div> {{tab.fields.radio.text}}</p>
+                                            <div layout="row" layout-wrap flex>
+                                                <md-switch ng-model="tab.fields.radio.state" aria-label="Switch 1">
+                                                    Switch 1: {{ tab.fields.radio.state }}
+                                                </md-switch>
+                                            </div>
+                                        </fieldset>
+                                        <fieldset class="standard">
+                                            <p><div class="pin"><div class="in_pin">3. </div></div> {{tab.fields.drop.text}}</p>
+                                            <div layout="row" layout-wrap flex>
+                                                <md-select ng-model="ctrl.userState" style="margin-left: 42px;">
+                                                    <md-option ng-repeat="state in tab.fields.drop.list" value="{{state}}">
+                                                        {{state}}
+                                                    </md-option>
+                                                </md-select>
+                                            </div>
+                                        </fieldset>
+
+                                    </div>
+                                    <div ng-if="tab.title == 'Finalize' ">
+                                        <p>This is what you selected</p>
+                                        <div layout="row" layout-wrap flex>
+                                            <div class="standard" flex="100">
+                                                <span class="label label-success">ABCD</span>
+                                                <span class="label label-success">EFGH</span>
+                                                <span class="label label-success">HIJK</span>
+                                                <span class="label label-success">LMNO</span>
+                                                <p>Download the documentation from <a href="">HERE</a> </p>
+                                                <p>Download the additional content</p>
+                                                <md-button class="md-raised md-primary">ENV1</md-button>
+                                                <md-button class="md-raised md-primary">ENV2</md-button>
+                                                <md-button class="md-raised md-primary">ENV3</md-button>
+                                                <p>How was your overall experience?</p>
+                                                <div layout>
+                                                    <md-slider class="md-warn md-active" flex md-discrete ng-model="tab.fields.feedback_count" step="1" min="0" max="10" aria-label="rating">
+                                                    </md-slider>
+                                                </div>
+                                                <md-button class="md-raised md-primary" href="#/feedback">PROVIDE FEEDBACK</md-button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--<md-card-actions layout="row" layout-align="end center" ng-if="tab.title != 'Finalize'">
+                                    <md-button ng-click="toggleAddTab()" class="md-icon-button md-accent" aria-label="Add">
+                                        <md-tooltip md-direction="bottom">
+                                            ADD TAB
+                                        </md-tooltip>
+                                        <md-icon md-svg-icon="custom/icons/add.svg"></md-icon>
+                                    </md-button>
+                                    <md-button class="md-icon-button md-accent" aria-label="remove"  ng-click="removeTab( tab )" ng-disabled="tabs.length <= 1">
+                                        <md-tooltip md-direction="bottom">
+                                            REMOVE TAB
+                                        </md-tooltip>
+                                        <md-icon md-svg-icon="custom/icons/remove.svg"></md-icon>
+                                    </md-button>
+                                </md-card-actions>-->
+                            </md-tab>
+                        </md-tabs>
+                    </md-content>
+
+
+                    <form ng-if="isAddTab" ng-submit="addTab(tTitle,tContent)" layout="column" class="md-padding" style="padding-top: 0;">
+                        <div layout="row" layout-sm="column">
+                            <div flex style="position: relative;">
+                                <h2 class="md-subhead" style="position: absolute; bottom: 0; left: 0; margin: 0; font-weight: 500; text-transform: uppercase; line-height: 35px; white-space: nowrap;">Add a new Tab:</h2>
+                            </div>
+                            <md-input-container>
+                                <label for="label">Label</label>
+                                <input type="text" id="label" ng-model="tTitle">
+                            </md-input-container>
+                            <md-input-container>
+                                <label for="content">Content</label>
+                                <input type="text" id="content" ng-model="tContent">
+                            </md-input-container>
+                            <md-button class="add-tab md-primary md-raised" ng-disabled="!tTitle || !tContent" type="submit" style="margin-right: 0;">Add Tab</md-button>
+                        </div>
+                    </form>
+                    <div layout="row" layout-align="center">
+                        <md-button ng-if="selectedIndex>0" class="md-raised md-primary" ng-click = "previousTab()">PREVIOUS</md-button>
+                        <md-button class="md-raised md-primary" ng-click = "nextTab()">NEXT</md-button>
+                        <md-button class="md-raised md-primary" ng-click = "gotoFinishTab()">FINISH</md-button>
+                        <md-button class="md-raised md-warn">CANCEL</md-button>
+                    </div>
+                </md-card>
+            </div>
+            <div class="col-md-4">
+                <div ng-include="'view1/side_bar_html.html'"></div>
+            </div>
+        </div>
+    </div>
+</section>

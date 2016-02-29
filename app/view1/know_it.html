@@ -1,0 +1,275 @@
+
+<style>
+    input[type=checkbox] {
+        display:none;
+    }
+
+    input[type=checkbox] + label
+    {
+        /*padding: 10px;
+        text-align: center;
+        background-color: darkgrey;
+        margin: 13px;
+        color: #ffffff;
+        border-radius: 10px;*/
+
+        background: rgba(0, 0, 0, 0.3);
+        color: rgba(255,255,255,0.87);
+        cursor:default;
+        display: block;
+        height: 32px;
+        line-height: 32px;
+        float: left;
+        box-sizing: border-box;
+        max-width: 100%;
+        position: relative;
+        border-radius: 16px;
+        margin: 8px 8px 0px 0px;
+        padding: 0px 12px;
+
+        margin-left: 20px;
+
+    }
+    input[type=checkbox]:checked + label
+    {
+        /*margin: 13px;
+        padding: 10px;
+        text-align: center;
+        background-color: #ffa35f;
+        margin: 3px;
+        color: #000000;
+        border-radius: 10px;*/
+
+        background: rgb(16,108,200);
+        color: rgba(255,255,255,0.87);
+
+        display: block;
+        height: 32px;
+        line-height: 32px;
+        float: left;
+        box-sizing: border-box;
+        max-width: 100%;
+        position: relative;
+        border-radius: 16px;
+        margin: 8px 8px 0px 0px;
+        padding: 0px 12px;
+        margin-left: 20px;
+        font-family: Roboto, 'Helvetica Neue', sans-serif;
+
+
+
+    }
+
+    input[type=checkbox]:checked + label:before {
+        /*content: "\f046";
+        font-family: FontAwesome;
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: inherit;
+        /!*--adjust as necessary--*!/
+        color: #ffa35f;
+        font-size: 18px;
+        padding-right: 0.7em;
+        position: absolute;
+        left: 0;*/
+    }
+
+
+    /*Draggable Css*/
+    #topnav {
+        background-color: #333333;
+        display: block;
+        height: 35px;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        background-color: #DDD;
+    }
+
+    #sidebar {
+        background-color: transparent;
+        position: absolute;
+        top: 35px;
+        bottom: 0;
+        left: 0;
+        width: 200px;
+        overflow: auto;
+    }
+    #content {
+        position: absolute;
+        top: 35px;
+        bottom: 0;
+        left: 206px /* 200 + 6*/;
+        right: 0;
+        overflow: hidden;
+        color: #FFF;
+
+    }
+
+    #content1 {
+        position: absolute;
+        top: 35px;
+        bottom: 0;
+        left: 206px /* 200 + 6*/;
+        right: 0;
+        overflow: hidden;
+        color: #FFF;
+
+    }
+    #top-content {
+        position: absolute;
+        top: 0;
+        bottom: 136px; /* 130 + 6 */
+        left: 0;
+        right: 0;
+        background-color: #444;
+        overflow: auto;
+    }
+    #bottom-content {
+        position: absolute;
+        height: 130px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: auto;
+        background-color: #777;
+    }
+
+    #sidebar-resizer {
+        background-color: #666;
+        position: absolute;
+        top: 35px;
+        bottom: 0;
+        left: 200px;
+        width: 6px;
+        cursor: e-resize;
+    }
+    #content-resizer {
+        position: absolute;
+        height: 6px;
+        bottom: 130px;
+        left: 0;
+        right: 0;
+        background-color: #666;
+        cursor: n-resize;
+    }
+
+    #sidebar-resizer:hover, #preview-resizer:hover {
+        background-color: #AAA;
+    }
+</style>
+
+
+<div class="container">
+    <div class="row col-md-12">
+        <div class="col-md-12" style="margin-top: 50px; margin-bottom: 20px;">
+            <div ng-include="'view1/top_bar.html'"></div>
+        </div>
+
+        <div class="col-md-8">
+            <h4>If you know what you want, you can simply drag and drop contents here and we will do the actual plumbing</h4>
+            <a href="#">See how it works</a>
+            <div ng-init="getThing()">
+            <p><div class="pin"><div class="in_pin">1. </div></div>  What kind of thing you want to do?</p>
+            <input type='checkbox' name='This' value='valuable' id="This" ng-model="thing.this"/><label for="This">This
+                <i class="fa fa-tags"></i></label>
+            <input type='checkbox' name='That' value='valuable' id="That" ng-model="thing.that"/><label for="That">That
+                <i class="fa fa-tags"></i></label>
+            <input type='checkbox' name='Flexible' value='valuable' id="Flexible" ng-model="thing.flexible"/><label for="Flexible">Flexible
+                <i class="fa fa-tags"></i></label>
+            </div>
+            <div class="col-md-12" style="display: inline-flex; margin-top: 20px;">
+                <div class="col-md-3 draggable-objects drag_me_container" >
+                    <div ng-repeat="object in draggableObjects">
+                        <h5 style="color: #ffffff;">{{object.type}}</h5>
+                        <div ng-drag="true"  ng-drag-data="name_value" data-allow-transform="true" class="col-md-5 drag_me" ng-repeat="name_value in object.value">
+                            {{name_value.name}}
+                        </div>
+                    </div>
+                </div>
+
+                <div ng-drop="true" ng-drop-success="onDropCompleteA($data,$event)" class="col-md-2 type_drop_container" resizer="vertical_first" resizer-height="1">
+                    <div ng-if="droppedObjectsA.length == 0">
+                        <div class="col-md-12 drop_me" >
+                            Type A Drop Here
+                        </div>
+                        <div class="col-md-12 drop_me" >
+                            Type A Drop Here
+                        </div>
+                        <div class="col-md-12 drop_me" >
+                            Type A Drop Here
+                        </div>
+                        <div class="col-md-12 drop_me">
+                            Type A Drop Here
+                        </div>
+                    </div>
+                    <div ng-repeat="obj in droppedObjectsA" ng-drag="true" ng-drag-data="obj" class="col-md-12 drop_me"  ng-drag-success="onDragSuccessA($data,$event)" ng-center-anchor="{{centerAnchor}}">
+                        {{obj.name}}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="type_b_c_drop_container" ng-class="{inline_div : droppedObjectsBC.length == 0, inline_div_block : droppedObjectsBC.length > 0}" ng-drop="true" ng-drop-success="onDropCompleteBC($data,$event)" resizer="vertical_second" resizer-height="1">
+                        <div class="col-md-4 drop_me_b_c" ng-if="droppedObjectsBC.length == 0">
+                            Type B Drop Here
+                        </div>
+                        <div class="col-md-4 drop_me_b_c" ng-if="droppedObjectsBC.length == 0">
+                            Type C Drop Here
+                        </div>
+                        <div class="col-md-4 drop_me_b_c" ng-if="droppedObjectsBC.length == 0">
+                            Type B Drop Here
+                        </div>
+                        <div ng-repeat="obj in droppedObjectsBC" class="col-md-4 drop_me_b_c" ng-drag="true" ng-drag-data="obj" ng-drag-success="onDragSuccessBC($data,$event)" ng-center-anchor="{{centerAnchor}}">
+                            {{obj.name}}
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="type_b_c_drop_container" ng-class="{inline_div : droppedObjectsAll.length == 0, inline_div_block : droppedObjectsAll.length > 0}" ng-drop="true" ng-drop-success="onDropCompleteAll($data,$event)" style=" margin-top: 120px;" resizer="vertical_third" resizer-height="1">
+                        <div class="col-md-4 drop_me_b_c" ng-if="droppedObjectsAll.length == 0">
+                            Any Drop Here
+                        </div>
+                        <div class="col-md-4 drop_me_b_c" ng-if="droppedObjectsAll.length == 0">
+                            Any Drop Here
+                        </div>
+                        <div class="col-md-4 drop_me_b_c" ng-if="droppedObjectsAll.length == 0">
+                            Any Drop Here
+                        </div>
+                        <div ng-repeat="obj in droppedObjectsAll" class="col-md-4 drop_me_b_c" ng-drag="true" ng-drag-data="obj" ng-drag-success="onDragSuccessAll($data,$event)" ng-center-anchor="{{centerAnchor}}">
+                            {{obj.name}}
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-2 type_drop_container" ng-drop="true" ng-drop-success="onDropCompleteAllSide($data,$event)"  style="margin-left: auto;" id="content"
+                     resizer="horizontal" resizer-height="1" resizer-bottom="#bottom-content">
+                    <div ng-if="droppedObjectsAllSide.length == 0" >
+                        <div class="col-md-12 drop_me">
+                            Drop Here
+                        </div>
+                        <div class="col-md-12 drop_me">
+                            Drop Here
+                        </div>
+                        <div class="col-md-12 drop_me">
+                            Drop Here
+                        </div>
+                        <div class="col-md-12 drop_me">
+                            Drop Here
+                        </div>
+                    </div>
+                    <div ng-repeat="obj in droppedObjectsAllSide" ng-drag="true" ng-drag-data="obj" class="col-md-12 drop_me"  ng-drag-success="onDragSuccessAllSide($data,$event)" ng-center-anchor="{{centerAnchor}}">
+                        {{obj.name}}
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div layout="row" layout-align="center">
+                <md-button class="md-raised md-primary" ng-click = "">FINISH</md-button>
+                <md-button class="md-raised md-primary" ng-click = "gotoMoreDetails()">PROVIDE MORE DETAILS</md-button>
+            </div>
+
+        </div>
+        <div class="col-md-4" >
+            <div ng-include="'view1/side_bar_html.html'"></div>
+        </div>
+    </div>
+</div>

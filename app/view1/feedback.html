@@ -1,0 +1,107 @@
+<style>
+    .tabsdemoDynamicTabs md-content {
+        background-color: transparent !important; }
+    .tabsdemoDynamicTabs md-content md-tabs {
+        border: 1px solid #e1e1e1; }
+    .tabsdemoDynamicTabs md-content md-tabs md-tab-content {
+        background: #f6f6f6; }
+    .tabsdemoDynamicTabs md-content md-tabs md-tabs-wrapper {
+        background: white; }
+    .tabsdemoDynamicTabs md-content h1:first-child {
+        margin-top: 0; }
+    .tabsdemoDynamicTabs md-input-container {
+        padding-bottom: 0; }
+    .tabsdemoDynamicTabs .remove-tab {
+        margin-bottom: 40px; }
+    .tabsdemoDynamicTabs .demo-tab > div > div {
+        padding: 25px;
+        box-sizing: border-box; }
+    .tabsdemoDynamicTabs .edit-form input {
+        width: 100%; }
+    .tabsdemoDynamicTabs md-tabs {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.12); }
+    .tabsdemoDynamicTabs md-tab[disabled] {
+        opacity: 0.5; }
+    .tabsdemoDynamicTabs label {
+        text-align: left; }
+    .tabsdemoDynamicTabs .long > input {
+        width: 264px; }
+    .tabsdemoDynamicTabs .md-button.add-tab {
+        transform: translateY(5px); }
+    .pin {
+        background: #2d353c;
+        display: inline-block;
+        border-radius: 17px 17px 17px 0;
+        width: 35px;
+        text-align:center;
+        color: #ffffff;
+        margin-right: 5px;
+        height: 35px;
+        border: 6px solid #2d353c;
+        -webkit-transform: rotate(220deg);
+        -moz-transform: rotate(220deg);
+        -ms-transform: rotate(220deg);
+        -o-transform: rotate(220deg);
+        transform: rotate(220deg);
+        text-align: justify;
+        margin-right: 5px;
+        position: relative;
+        -webkit-box-shadow: -1px 1px 2px rgba(0,0,0,.2);
+        -moz-box-shadow: -1px 1px 2px rgba(0,0,0,.2);
+        box-shadow: -1px 1px 2px rgba(0,0,0,.2);
+    }
+    .in_pin{
+        -webkit-transform: rotate(-220deg);
+        -moz-transform: rotate(-220deg);
+        -ms-transform: rotate(-220deg);
+        -o-transform: rotate(-220deg);
+        transform: rotate(-220deg);
+        text-align: center;
+        font-weight: bold;
+    }
+</style>
+
+
+
+<div class="container" ng-init="feedback()">
+    <div class="row col-md-12">
+        <div class="col-md-12" style="margin-top: 50px; margin-bottom: 20px;">
+            <div ng-include="'view1/top_bar.html'"></div>
+        </div>
+
+        <div class="col-md-8">
+            <h2>Please provide some feedback</h2>
+            <h4>All the question are optional</h4>
+
+            <fieldset class="standard">
+                <p><div class="pin"><div class="in_pin">1. </div></div> How would you rate the experience</p>
+                <div layout="row" style="margin-left: 32px;" layout-wrap flex>
+                    <md-button class="md-raised md-default">Good</md-button>
+                    <md-button class="md-raised md-default">Bad</md-button>
+                </div>
+            </fieldset>
+            <fieldset class="standard">
+                <p><div class="pin"><div class="in_pin">2. </div></div> Will you use the facility again</p>
+                <div layout="row" style="margin-left: 32px;" layout-wrap flex>
+                    <md-button class="md-raised md-default">Yes</md-button>
+                    <md-button class="md-raised md-default">No</md-button>
+                </div>
+            </fieldset>
+            <fieldset class="standard">
+                <p><div class="pin"><div class="in_pin">3. </div></div> Will you recommend us to your freind?</p>
+                <div layout="row" style="margin-left: 32px;" layout-wrap flex>
+                    <md-button class="md-raised md-default">Yes</md-button>
+                    <md-button class="md-raised md-default">No</md-button>
+                </div>
+                <div layout="row" style="margin-left: 56px; margin-top: 33px;" layout-wrap flex>
+                    <md-button class="md-raised md-primary">Provide Feedback</md-button>
+                </div>
+            </fieldset>
+
+        </div>
+
+        <div class="col-md-4" >
+            <div ng-include="'view1/side_bar_html.html'"></div>
+        </div>
+    </div>
+</div>

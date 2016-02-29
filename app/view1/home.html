@@ -1,0 +1,39 @@
+<style>
+
+</style>
+<section id="about">
+    <div class="container">
+        <div class="row col-md-12">
+            <div class="col-md-12" style="margin-top: 10px; margin-bottom: 20px;">
+                <div ng-include="'view1/top_bar.html'"></div>
+            </div>
+            <div class="col-md-8" align="center">
+                <md-card style="background-color: #f1f1f1;">
+                    <uib-carousel interval="myInterval" no-wrap="noWrapSlides">
+                        <uib-slide ng-repeat="slide in slides" active="slide.active" index="slide.id">
+                            <a href="#">
+                                <div style="display: inline-flex">
+                                    <div class="span3"><a href="#x" class="thumbnail"><img src="//lorempixel.com/300/300" alt="Image" style="max-width:100%; margin: 1px;"></a></div>
+                                    <div class="span3"><a href="#x" class="thumbnail"><img src="//lorempixel.com/300/300" alt="Image" style="max-width:100%; margin: 1px;"></a></div>
+                                    <div class="span3"><a href="#x" class="thumbnail"><img src="//lorempixel.com/300/300" alt="Image" style="max-width:100%; margin: 1px;"></a></div>
+                                </div>
+                            </a>
+                        </uib-slide>
+                    </uib-carousel>
+                </md-card>
+                <h3>-----OR-----</h3>
+                <a href="#/build">
+                    <md-button class="md-raised md-warn">BUILD YOUR OWN</md-button>
+                </a>
+                <a href="#/know_it">
+                    <md-button class="md-raised md-warn">Know It</md-button>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <div ng-include="'view1/side_bar_html.html'"></div>
+            </div>
+
+        </div>
+
+    </div>
+</section>

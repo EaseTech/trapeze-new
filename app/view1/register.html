@@ -1,0 +1,100 @@
+<style>
+    .inputdemoIcons .inputIconDemo {
+        min-height: 48px; }
+    .inputdemoIcons md-input-container:not(.md-input-invalid) > md-icon.email {
+        color: green; }
+    .inputdemoIcons md-input-container:not(.md-input-invalid) > md-icon.name {
+        color: dodgerblue; }
+    .inputdemoIcons md-input-container.md-input-invalid > md-icon.email,
+    .inputdemoIcons md-input-container.md-input-invalid > md-icon.name {
+        color: red; }
+</style>
+<section id="about">
+    <div class="container">
+        <div class="row col-md-12">
+            <div class="col-md-12" style="margin-top: 10px; margin-bottom: 20px;">
+                <div ng-include="'view1/top_bar.html'"></div>
+            </div>
+            <div class="col-md-8" align="center">
+                <md-card style=" padding: 10px;">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <div ng-if="login_failed" class="alert alert-dismissible alert-danger">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <strong>Oh snap! Registeration Failed</strong>
+                                <a href="javascript:void(0)" class="alert-link">Change a few things up</a> and try submitting again.
+                            </div>
+                            <span class="md-headline">REGISTER</span>
+                            <span class="md-subhead">Enter your details</span>
+                        </md-card-title-text>
+                        <md-card-title-media>
+                            <div class="md-media-lg card-media">
+                                <img ng-src="custom/icons/user.svg" style="color: #00c766;">
+                            </div>
+                        </md-card-title-media>
+                    </md-card-title>
+                    <md-content layout-padding>
+                        <form name="userForm" data-ng-submit="register_user(userForm)">
+                            <div layout-gt-sm="row">
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>Name</label>
+                                    <input md-maxlength="40" required name="name" ng-model="user.name" />
+                                    <div class="hint" ng-if="true">Tell us what we should call you!</div>
+                                    <div ng-messages="userForm.name.$error" ng-if="!showHints">
+                                        <div ng-message="required">Name is required.</div>
+                                        <div ng-message="md-maxlength">The name has to be less than 40 characters long.</div>
+                                    </div>
+                                </md-input-container>
+                                <div flex="5" hide-xs hide-sm>
+                                    <!-- Spacer //-->
+                                </div>
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>Password</label>
+                                    <input name="email" ng-model="user.password"
+                                           required  type="password"/>
+                                    <div class="hint" ng-show="true">Enter strong password</div>
+                                </md-input-container>
+                            </div>
+                            <div layout-gt-sm="row">
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>Email</label>
+                                    <input name="email" ng-model="user.email"
+                                           required minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/" />
+                                    <div class="hint" ng-show="true">How can we reach you?</div>
+                                    <div ng-messages="userForm.email.$error" ng-hide="showHints">
+                                        <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                                            Your email must be between 10 and 100 characters long and look like an e-mail address.
+                                        </div>
+                                    </div>
+                                </md-input-container>
+                                <div flex="5" hide-xs hide-sm>
+                                    <!-- Spacer //-->
+                                </div>
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>Phone Number</label>
+                                    <input name="phone" ng-model="user.phone" type="number" required />
+                                    <div class="hint" ng-show="true">##########</div>
+                                    <div ng-messages="userForm.phone.$error" ng-hide="showHints">
+                                        <div ng-message="pattern">########## - Please enter a valid phone number.</div>
+                                    </div>
+                                </md-input-container>
+                                <style>
+                                    body[dir=rtl] .hint {
+                                        right: 2px;
+                                        left: auto;
+                                    }
+                                </style>
+                            </div>
+                            <md-card-actions layout="row" layout-align="end center">
+                                <md-button type="submit" class="md-raised md-primary">SUBMIT</md-button>
+                            </md-card-actions>
+                        </form>
+                    </md-content>
+                </md-card>
+            </div>
+            <div class="col-md-4">
+                <div ng-include="'view1/side_bar_html.html'"></div>
+            </div>
+        </div>
+    </div>
+</section>

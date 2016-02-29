@@ -1,0 +1,75 @@
+<section id="about">
+    <div class="container">
+        <div class="row col-md-12">
+            <div class="col-md-12" style="margin-top: 10px; margin-bottom: 20px;">
+                <div ng-include="'view1/top_bar.html'"></div>
+            </div>
+            <div class="col-md-8" align="center">
+                <md-card style=" padding: 10px;">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <div ng-if="login_failed" class="alert alert-dismissible alert-danger">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <strong>Oh snap! Login Failed</strong>
+                                <a href="javascript:void(0)" class="alert-link">Change a few things up</a> and try submitting again.
+                            </div>
+                            <span class="md-headline">LOGIN</span>
+                            <span class="md-subhead">Enter your details</span>
+                        </md-card-title-text>
+                        <md-card-title-media>
+                            <div class="md-media-lg card-media">
+                                <img ng-src="custom/icons/login.svg" style="color: #00c766;">
+                            </div>
+                        </md-card-title-media>
+                    </md-card-title>
+                    <md-content layout-padding>
+                        <form name="userForm" data-ng-submit="login_user()">
+                            <div layout-gt-sm="row">
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>Email</label>
+                                    <input name="email" ng-model="login_data.email"
+                                           required minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/" />
+                                    <div class="hint" ng-show="true">Enter you registere Email</div>
+                                    <div ng-messages="userForm.email.$error" ng-hide="showHints">
+                                        <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                                            Your email must be between 10 and 100 characters long and look like an e-mail address.
+                                        </div>
+                                    </div>
+                                </md-input-container>
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>Password</label>
+                                    <input name="email" ng-model="login_data.password"
+                                           required  type="password"/>
+                                    <div class="hint" ng-show="true">Enter strong password</div>
+                                </md-input-container>
+                                <style>
+                                    body[dir=rtl] .hint {
+                                        right: 2px;
+                                        left: auto;
+                                    }
+                                </style>
+                            </div>
+                            <md-card-actions layout="row" layout-align="end center">
+                                <md-button type="submit" class="md-raised md-primary">Login</md-button>
+                                <md-button class="md-raised md-primary" ng-click="login_reset()">Cancel</md-button>
+                            </md-card-actions>
+                        </form>
+                        <hr>
+                        <h3>SOCIAL LOGINS</h3>
+                        <div class="text-center height-contact-element">
+                            <ul class="list-unstyled list-inline list-social-icons">
+                                <li class="active"><a href="#"><i class="fa fa-facebook social-icons"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter social-icons"></i></a></li>
+                                <li><a href="#"><i class="fa fa-google-plus social-icons"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin social-icons"></i></a></li>
+                            </ul>
+                        </div>
+                    </md-content>
+                </md-card>
+            </div>
+            <div class="col-md-4">
+                <div ng-include="'view1/side_bar_html.html'"></div>
+            </div>
+        </div>
+    </div>
+</section>

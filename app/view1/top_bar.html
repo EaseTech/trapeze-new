@@ -1,0 +1,23 @@
+
+<md-whiteframe class="md-whiteframe-3dp" flex-sm="100" flex-gt-sm="100" flex-gt-md="100" layout layout-align="left center">
+    <div class="col-md-12" ng-controller="topbarCtrl">
+        <div class="col-md-9">
+            <h3>Loream Ipsum loream ipsummmmmmmm</h3>
+            <h5>1234 Active Members and counting</h5>
+        </div>
+        <div class="col-md-3">
+            <md-card style="background-color: #f1f1f1;">
+                <uib-carousel interval="myInterval" no-wrap="noWrapSlides">
+                    <uib-slide ng-repeat="slide in slides" active="slide.active" index="slide.id">
+                        <a href="#/know_it/{{slide.text}}">
+                            <img ng-src="{{slide.image}}" style="margin:auto;">
+                            <div class="carousel-caption">
+                                <h4><b>{{slide.text}}</b></h4>
+                            </div>
+                        </a>
+                    </uib-slide>
+                </uib-carousel>
+            </md-card>
+        </div>
+    </div>
+</md-whiteframe>
